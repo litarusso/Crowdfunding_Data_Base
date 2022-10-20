@@ -28,8 +28,6 @@ INTO contact_summary
 FROM contact as c JOIN campaign as ca on c.contact_id = ca.contact_id
 WHERE ca.outcome = 'live' 
 ORDER BY amount_left DESC
-
-
 -- Check the table
 SELECT * FROM contact_summary
 
@@ -42,13 +40,13 @@ b.last_name,
 b.email, 
 ca.cf_id, 
 ca.company_name, 
-ca.blurb, ca.deadline 
+ca.blurb, ca.deadline, 
 (ca.goal - ca.pledged) as Left_of_Goal
---INTO email_backers_remaining_goal_amount
-FROM campaign as ca 
-JOIN backers as b on ca.contact_id
+INTO email_backers_remaining_goal_amount
+FROM campaign as ca
+JOIN backers as b on ca.cf_id = b.cf_id
 ORDER BY last_name DESC
 
 -- Check the table
 
-
+SELECT * FROM email_backers_remaining_goal_amount
